@@ -1,0 +1,25 @@
+[Desktop Entry]
+Encoding=UTF-8
+Version=0.9.4
+NoDisplay=false
+Exec=xterm -e dz_sync.sh %F
+#MimeType=inode/directory
+Name=DZ sync AUTO
+Name[ru]=DZ sync AUTO
+Comment=File synchronization
+Comment[ru]=Синхронизация файлов
+Type=Application
+Categories=System;
+#OnlyShowIn=XFCE;
+Icon=dz_logo
+StartupNotify=true
+Terminal=false
+Hidden=false
+Keywords=rsync;sync
+
+
+# Обновить базу данных ярлыков
+# update-desktop-database ~/.local/share/applications
+
+# Проверить наличие устаревших ключей в своих ярлыках
+# desktop-file-validate ваш-desktop-файл

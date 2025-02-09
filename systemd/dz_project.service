@@ -1,0 +1,12 @@
+[Unit]
+Description=DZ project service
+BindsTo=graphical-session.target
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+ExecStart=xterm -e %h/.local/bin/dz_sync.sh
+ExecStop=%h/.local/bin/dz_shutdown.sh
+
+[Install]
+WantedBy=default.target

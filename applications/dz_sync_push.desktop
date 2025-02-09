@@ -1,0 +1,25 @@
+[Desktop Entry]
+Encoding=UTF-8
+Version=0.9.4
+NoDisplay=false
+Exec=xterm -e dz_sync_push.sh %F
+MimeType=inode/directory
+Name=DZ sync PUSH
+Name[ru]=DZ sync PUSH
+Comment=PUSH files to server
+Comment[ru]=Положить файлы на сервер
+Type=Application
+Categories=System;
+#OnlyShowIn=XFCE;
+Icon=dz_logo
+StartupNotify=true
+Terminal=false
+Hidden=false
+Keywords=rsync;sync
+
+
+# Обновить базу данных ярлыков
+# update-desktop-database ~/.local/share/applications
+
+# Проверить наличие устаревших ключей в своих ярлыках
+# desktop-file-validate ваш-desktop-файл

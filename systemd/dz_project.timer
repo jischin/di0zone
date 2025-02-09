@@ -1,0 +1,10 @@
+[Unit]
+Description=Start the dz_project service
+Requires=dz_project.service
+
+[Timer]
+Unit=dz_project.service
+OnStartupSec=5s
+
+[Install]
+WantedBy=timers.target
