@@ -2,7 +2,7 @@
 Encoding=UTF-8
 Version=0.9.4
 NoDisplay=false
-Exec=xterm -e dz_shutdown.sh %F
+Exec=alacritty -e dz_shutdown.sh %F
 #MimeType=inode/directory
 Name=DZ shutdown
 Name[ru]=DZ shutdown

@@ -15,14 +15,12 @@ LOG_FILE="/dev/null"
 . "${HOME}/.local/share/${PROJECT_NAME}/lib/dz_log_lib.sh"
 . "${HOME}/.local/share/${PROJECT_NAME}/lib/dz_encfs_lib.sh"
 
-dlog "pause:ok:20" "Будет размонтирована EncFS, синхронизировано рабочее окружение."
+${HOME}/.local/bin/dz_sync.sh
 
 for MOUNT_POINT in $(cat /proc/mounts | grep encfs | cut -d' ' -f2); do
     dlog "status:info" "${MOUNT_POINT}"
     encfs_umount "$(echo -e ${MOUNT_POINT})"
 done
-
-dz_sync.sh
 
 dlog "wait" "<R>-перезагрузка, <Q>-выход, <Enter> - выключить..."
 read -sn 1 -p "Нажмите клавишу..." KEY 2>&1

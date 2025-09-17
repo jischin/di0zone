@@ -40,7 +40,7 @@ if [ ! -d "${MOUNT_POINT}" ]; then
 fi
 dlog "status:ok"
 
-dlog "info:check" "Поделючение encFS..."
+dlog "info:check" "Подключение encFS..."
 while [ "${FAIL_COUNT}" -gt 0 ]; do
     if ENCFS6_CONFIG="${ENCFS6_CONFIG}" encfs "${DIR}" "${MOUNT_POINT}"; then
         dlog "exit:ok" "Выполнено."
