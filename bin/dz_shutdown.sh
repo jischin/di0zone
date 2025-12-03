@@ -11,31 +11,26 @@
 
 PROJECT_NAME="Di0Zone"
 APP_NAME="dz_shutdown"
-LOG_FILE="/dev/null"
+
 . "${HOME}/.local/share/${PROJECT_NAME}/lib/dz_log_lib.sh"
 . "${HOME}/.local/share/${PROJECT_NAME}/lib/dz_encfs_lib.sh"
 
-${HOME}/.local/bin/dz_sync.sh
-
-for MOUNT_POINT in $(cat /proc/mounts | grep encfs | cut -d' ' -f2); do
-    dlog "status:info" "${MOUNT_POINT}"
-    encfs_umount "$(echo -e ${MOUNT_POINT})"
-done
+dz_sync.sh
 
 dlog "wait" "<R>-перезагрузка, <Q>-выход, <Enter> - выключить..."
-read -sn 1 -p "Нажмите клавишу..." KEY 2>&1
+read -rsn 1 -p "Нажмите клавишу..." KEY 2>&1
 case "${KEY}" in
     "R"|"r"|"К"|"к")
+        all_encfs_umount
         systemctl reboot
         ;;
     "Q"|"q"|"Й"|"й")
-        :
+        exit 0
         ;;
     *)
+        all_encfs_umount
         systemctl poweroff
         ;;
 esac
-
-echo
 
 exit 0

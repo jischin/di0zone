@@ -2,7 +2,7 @@
 Encoding=UTF-8
 Version=0.9.4
 NoDisplay=false
-Exec=alacritty -e dz_encfs.sh %F
+Exec=alacritty -T "EncFS" -e dz_encfs.sh %F
 MimeType=inode/directory
 Name=DZ encfs
 Name[ru]=DZ encfs

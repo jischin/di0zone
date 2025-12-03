@@ -30,32 +30,28 @@ function local_check() {
 }
 
 function server_check() {
-    # Проверяется доступность сервера по списку адресов, затем наличие
+    # Проверяется доступность сервера по адресу, затем наличие
     # его базового каталога - при отсутствии будет попытка его создать.
-    # Проверяется его доступность для записи.
-    # Параметр ${@} - массив - список адресов сервера, по которым
+    # Проверяется доступность базового каталога для записи.
+    # Параметр ${1} - IP адрес или URL сервера, по которому
     # определяется его доступность.
-
-    for SERVER_URL in "${@}"; do
-        dlog "check" "Сервер ${SERVER_URL}..."
-        if ! ssh -qo ConnectTimeout=3 "${SERVER_URL}" exit
-        then
-            dlog "status:warning" "Не доступен!"
-            continue
-        fi
-        dlog "status:ok"
-        dlog "check" "Базовый каталог на сервере..."
-        if ssh -q "${SERVER_URL}" [ ! -d \""${SERVER_BASE_DIR}"\" ] '&&' \
-        ! mkdir -p \""${SERVER_BASE_DIR}"\" '||' \
-        [ ! -w \""${SERVER_BASE_DIR}"\" ]; then
-            dlog "status:fatal" "Не доступен!"
-            return 2
-        fi
-        dlog "status:ok"
-        return 0
-    done
-    dlog "status:fatal" "Сервер не доступен!"
-    return 100
+    SERVER_URL="${1}"
+    dlog "check" "Сервер ${SERVER_URL}..."
+    if ! ssh -qo ConnectTimeout=3 "${SERVER_URL}" exit
+    then
+        dlog "status:fatal" "Не доступен!"
+        return 2
+    fi
+    dlog "status:ok"
+    dlog "check" "Базовый каталог на сервере..."
+    if ssh -q "${SERVER_URL}" [ ! -d \""${SERVER_BASE_DIR}"\" ] '&&' \
+    ! mkdir -p \""${SERVER_BASE_DIR}"\" '||' \
+    [ ! -w \""${SERVER_BASE_DIR}"\" ]; then
+        dlog "status:fatal" "Не доступен!"
+        return 2
+    fi
+    dlog "status:ok"
+    return 0
 }
 
 function direction_define() {
@@ -124,7 +120,7 @@ function sweep_trash() {
         -mtime +"${TRASH_AGE}" -exec rm -fr {} + &> /dev/null
     ssh "${SERVER_URL}" find \""${SERVER_TRASH_DIR}"\" -mindepth 1 \
         -maxdepth 1 -mtime +"${TRASH_AGE}" -exec rm -fr {} + &> /dev/null
-    find "${STATE_DIR}" -type f -name "${APP_NAME}.*.log" \
+    find "${LOG_FILE%/*}" -type f -name "*.log" \
         -mtime +"${TRASH_AGE}" -delete &> /dev/null
     return 0
 }
@@ -136,9 +132,9 @@ if ! local_check "${LOCAL_BASE_DIR}"; then
     exit 7
 fi
 
-cd "${LOCAL_BASE_DIR}"
+cd "${LOCAL_BASE_DIR}" || exit 7
 
-if ! server_check "${SERVER_ADDRESSES[@]}"; then
+if ! server_check "${SERVER_ADDRESS}"; then
     dlog "stop:fatal" "Критическая ошибка!"
     exit 5
 fi

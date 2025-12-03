@@ -2,6 +2,7 @@
 
 PROJECT_NAME="Di0Zone"
 APP_NAME="dz_encfs"
+LOG_FILE="${STATE_DIR}/${APP_NAME}.log/$(date +%F).log"
 
 LOG_FILE="/dev/null"
 . "${HOME}/.local/share/${PROJECT_NAME}/lib/dz_log_lib.sh"

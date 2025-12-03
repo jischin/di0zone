@@ -16,7 +16,9 @@ declare -rA LEVELS=(
     ["PUXX"]="\e[0;91mPULL:\e[0m"
 )
 
+# Если переменная LOG_FILE не определена...
 : "${LOG_FILE:="/tmp/dz_project.log"}"
+
 [ -d "${LOG_FILE%/*}" ] || mkdir -p "${LOG_FILE%/*}"
 exec 3>>"${LOG_FILE}" 2>&3
 

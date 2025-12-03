@@ -2,7 +2,7 @@
 Encoding=UTF-8
 Version=0.9.4
 NoDisplay=false
-Exec=alacritty -e dz_sync.sh %F
+Exec=alacritty -T "Синхронизация" -e dz_sync.sh %F
 #MimeType=inode/directory
 Name=DZ sync AUTO
 Name[ru]=DZ sync AUTO

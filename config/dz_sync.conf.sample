@@ -1,10 +1,7 @@
-# Список адресов или имён сервера синхронизации.
-declare -a SERVER_ADDRESSES=(
-    192.168.127.4
-    217.17.112.52
-)
+# IP адрес или URL сервера синхронизации.
+declare -a SERVER_ADDRESS="rpi.diozan.ru"
 
-# Список каталогов, подлежащих снхронизации.
+# Список каталогов, подлежащих синхронизации.
 declare -a SYNC_LIST=(
     "Develop"
     "Documents"
@@ -14,14 +11,17 @@ declare -a SYNC_LIST=(
     "Study"
     "Templates"
     "Utils"
+    ".ssh.enc"
+    ".config/kicad"
+    ".local/share/kicad"
 )
 
 # Фильтры команды rsync  (см. man rsync).
 declare -a SYNC_FILTER=(
     --filter="- .dz_sync"
-    --filter="- .git"
+#    --filter="- .git"
 #    --filter="- _venv"
-    --filter="- _build"
+#    --filter="- _build"
     --filter="- .Trash*"
     --filter="- .caltrash"
     --filter="- cache"
@@ -33,6 +33,6 @@ declare -a SYNC_PARAMETERS=(
     --verbose
 )
 
-# Возраст в днях файллогов и копий удалённых файлов старше которого
+# Возраст в днях файлов протоколов и копий удалённых файлов старше которого
 # они будут удалены при обслуживании синхронизируемых каталогов.
 declare -i TRASH_AGE=30

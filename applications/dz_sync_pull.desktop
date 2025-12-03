@@ -2,7 +2,7 @@
 Encoding=UTF-8
 Version=0.9.4
 NoDisplay=false
-Exec=alacritty -e dz_sync_pull.sh %F
+Exec=alacritty -T "Синхронизация PULL" -e dz_sync_pull.sh %F
 MimeType=inode/directory
 Name=DZ sync PULL
 Name[ru]=DZ sync PULL
