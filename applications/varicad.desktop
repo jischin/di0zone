@@ -1,0 +1,12 @@
+[Desktop Entry]
+Type=Application
+Encoding=UTF-8
+Name=VariCAD
+GenericName="VariCAD System"
+Comment="VariCAD - 2D and 3D mechanical CAD system"
+Icon=varicad
+FilePatern=varicad
+Exec=env DRI_PRIME=1 varicad
+Terminal=0
+Categories=Application;Graphics
+MimeType=application/varicad-dwb;application/varicad-dwg;application/varicad-dxf;application/varicad-stp;application/varicad-step;
